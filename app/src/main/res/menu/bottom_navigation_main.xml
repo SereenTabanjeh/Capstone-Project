@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_home"
+        android:checked="true"
+        android:icon="@drawable/ic_home_white_24dp"
+        android:title="@string/home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_workouts"
+        android:checked="false"
+        android:icon="@drawable/ic_fitness_center_white_24dp"
+        android:title="@string/workouts"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_maps"
+        android:checked="false"
+        android:icon="@drawable/ic_location_on_black_24dp"
+        android:title="Maps"
+        app:showAsAction="ifRoom" />
+
+</menu>
