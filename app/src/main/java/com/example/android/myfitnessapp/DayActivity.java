@@ -7,27 +7,22 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.support.design.widget.FloatingActionButton;
 import android.widget.Toast;
 
 import com.example.android.myfitnessapp.Adapter.exerciseAdapter;
 import com.example.android.myfitnessapp.Database.AppExecutors;
+import com.example.android.myfitnessapp.Database.ExerciseEntity;
 import com.example.android.myfitnessapp.Database.MainViewModel;
-import com.example.android.myfitnessapp.Database.exerciseDatabase;
-import com.example.android.myfitnessapp.Database.exerciseEntity;
 import com.example.android.myfitnessapp.Database.workoutDatabase;
 import com.example.android.myfitnessapp.Database.workoutEntity;
+import com.example.android.myfitnessapp.Widgets.WidgetUpdateService;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -36,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static com.example.android.myfitnessapp.MainActivity.alreadyExecuted;
 
 public class DayActivity extends BaseActivity implements View.OnClickListener {
 
@@ -49,9 +46,9 @@ public class DayActivity extends BaseActivity implements View.OnClickListener {
     String userId;
     List<Integer> exerciseIds;
     private static final String TAG = "DayActivity";
-
-
     Integer totalCal=0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +81,10 @@ public class DayActivity extends BaseActivity implements View.OnClickListener {
         setBottomNavChecked(0);
         setUpViewModelForExercises(strDate);
         GetTotalCalories(strDate);
-
+        if(!alreadyExecuted) {
+            startWidgetService();
+            alreadyExecuted = true;
+        }
 
         mSaveButton.setOnClickListener(this);
         mFab.setOnClickListener(this);
@@ -104,6 +104,17 @@ public class DayActivity extends BaseActivity implements View.OnClickListener {
         mEmptyView.setVisibility(View.GONE);
     }
 
+
+    private void startWidgetService() {
+        Intent i = new Intent(this, WidgetUpdateService.class);
+        Bundle bundle = new Bundle();
+        ExerciseEntity exercise = new ExerciseEntity();
+        exercise.setName("You don\\'t have any new exercise, go and log new exercise !");
+        bundle.putParcelable(MainActivity.EXERCISES, exercise);
+        i.putExtra(MainActivity.BUNDLE, bundle);
+        i.setAction(WidgetUpdateService.WIDGET_UPDATE_ACTION);
+        startService(i);
+    }
 
     @Override
     public void onClick(View v) {
@@ -130,9 +141,9 @@ public class DayActivity extends BaseActivity implements View.OnClickListener {
 
         MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         try {
-            viewModel.getExerciseList(date,userId).observe(this, new Observer<List<exerciseEntity>>() {
+            viewModel.getExerciseList(date,userId).observe(this, new Observer<List<ExerciseEntity>>() {
                 @Override
-                public void onChanged(@Nullable List<exerciseEntity> exerciseEntities) {
+                public void onChanged(@Nullable List<ExerciseEntity> exerciseEntities) {
                     if (exerciseEntities.size() != 0) {
                         mAdapter.setExerciseList(exerciseEntities);
                         mRecyclerView.setAdapter(mAdapter);
@@ -168,11 +179,12 @@ public class DayActivity extends BaseActivity implements View.OnClickListener {
                         for (int cal:calories) {
                             totalCal += cal;
                         }
-                        mCalories.setText("Calories Burned: "+totalCal.toString());
+                        mCalories.append(totalCal.toString());
 
 
                     } else {
-                        mCalories.setText("Calories Burned: 0 ");
+                        totalCal = 0;
+                        mCalories.append(totalCal.toString());
                         return;
                     }
                 }

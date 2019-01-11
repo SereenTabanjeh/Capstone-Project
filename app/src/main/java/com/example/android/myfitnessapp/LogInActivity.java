@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
+import com.example.android.myfitnessapp.Database.UserEntity;
 import com.example.android.myfitnessapp.Database.userDatabase;
-import com.example.android.myfitnessapp.Database.userEntity;
 
 public class LogInActivity  extends AppCompatActivity implements   View.OnClickListener{
 
@@ -22,7 +22,7 @@ public class LogInActivity  extends AppCompatActivity implements   View.OnClickL
     EditText mEmail;
     EditText mPassword;
     Button mLogInButton;
-    userEntity user;
+    UserEntity user;
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String IS_LOGIN = "IsLoggedIn";
     SharedPreferences settings;
@@ -36,7 +36,7 @@ public class LogInActivity  extends AppCompatActivity implements   View.OnClickL
         mEmail =findViewById(R.id.email);
         mPassword =findViewById(R.id.password);
         mLogInButton = findViewById(R.id.logInButton);
-        user = new userEntity();
+        user = new UserEntity();
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         checkLogin();
@@ -91,9 +91,8 @@ public class LogInActivity  extends AppCompatActivity implements   View.OnClickL
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-
             startActivity(intent);
+            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         }
 
         else{
@@ -109,6 +108,7 @@ public class LogInActivity  extends AppCompatActivity implements   View.OnClickL
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
+            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         }
 
     }

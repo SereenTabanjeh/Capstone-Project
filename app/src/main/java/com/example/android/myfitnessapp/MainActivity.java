@@ -1,5 +1,6 @@
 package com.example.android.myfitnessapp;
 
+import android.app.ActivityOptions;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -37,6 +38,7 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener 
     String strDate;
     public static final String BUNDLE = "bundle";
     public static final String EXERCISES = "exercises";
+    public static boolean alreadyExecuted = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,7 +128,12 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener 
         if (v == mSeeDetailsButton) {
             Intent intent = new Intent(MainActivity.this, DayActivity.class);
             intent.putExtra("date", mDate.getTime());
-            startActivity(intent);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                    overridePendingTransition(R.anim.slide_down, R.anim.slide_up);
+
+            }
         }
 
     }
@@ -148,7 +155,8 @@ public class MainActivity extends BaseActivity implements  View.OnClickListener 
 
 
                     } else {
-                        mCalories.setText("0");
+                        totalCal=0;
+                        mCalories.setText(totalCal);
                         return;
                     }
                 }

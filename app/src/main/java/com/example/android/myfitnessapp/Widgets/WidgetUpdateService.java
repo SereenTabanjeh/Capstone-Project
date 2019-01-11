@@ -8,14 +8,14 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
-import com.example.android.myfitnessapp.Database.exerciseEntity;
+import com.example.android.myfitnessapp.Database.ExerciseEntity;
 import com.example.android.myfitnessapp.MainActivity;
 
 
 public class WidgetUpdateService extends IntentService
 {
     public static final String WIDGET_UPDATE_ACTION = "com.example.android.myfitnessapp.Widgets.update_widget";
-    private exerciseEntity mExercise;
+    private ExerciseEntity mExercise;
 
     public WidgetUpdateService()
     {
@@ -31,7 +31,7 @@ public class WidgetUpdateService extends IntentService
             Parcelable parcelables = bundle.getParcelable(MainActivity.EXERCISES);
             if (parcelables != null)
             {
-                mExercise = (exerciseEntity)  parcelables;
+                mExercise = (ExerciseEntity)  parcelables;
 
             }
 
@@ -40,4 +40,5 @@ public class WidgetUpdateService extends IntentService
             FitnessAppProvider.updateAppWidget(this, appWidgetManager, appWidgetIds,mExercise);
         }
     }
+
 }

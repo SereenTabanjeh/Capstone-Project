@@ -1,16 +1,14 @@
 package com.example.android.myfitnessapp.Adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.myfitnessapp.Database.exerciseEntity;
+import com.example.android.myfitnessapp.Database.ExerciseEntity;
 import com.example.android.myfitnessapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -20,7 +18,7 @@ import java.util.Locale;
 public class exerciseAdapter extends   RecyclerView.Adapter<exerciseAdapter.exerciseViewHolder>  {
     private static final String TAG = "exerciseAdapter";
     Context mContext;
-    List<exerciseEntity> exerciseList;
+    List<ExerciseEntity> exerciseList;
     private View mView;
     private static final int MAX_WIDTH = 100;
     private static final int MAX_HEIGHT = 100;
@@ -30,7 +28,7 @@ public class exerciseAdapter extends   RecyclerView.Adapter<exerciseAdapter.exer
         notifyDataSetChanged();
     }
 
-    public void setExerciseList(List<exerciseEntity> exerciseList) {
+    public void setExerciseList(List<ExerciseEntity> exerciseList) {
         this.exerciseList = exerciseList;
     }
 

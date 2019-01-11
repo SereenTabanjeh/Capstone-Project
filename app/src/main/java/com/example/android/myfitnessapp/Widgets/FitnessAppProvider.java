@@ -6,13 +6,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
-import com.example.android.myfitnessapp.Database.exerciseEntity;
+
+import com.example.android.myfitnessapp.Database.ExerciseEntity;
 import com.example.android.myfitnessapp.R;
 
 
 public class FitnessAppProvider extends AppWidgetProvider
 {
-    public static exerciseEntity mExercises;
+    public static ExerciseEntity mExercises;
 
     public FitnessAppProvider()
     {
@@ -20,7 +21,7 @@ public class FitnessAppProvider extends AppWidgetProvider
     }
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetIds[], exerciseEntity exercises)
+                                int appWidgetIds[], ExerciseEntity exercises)
     {
         mExercises = exercises;
         for (int appWidgetId : appWidgetIds)

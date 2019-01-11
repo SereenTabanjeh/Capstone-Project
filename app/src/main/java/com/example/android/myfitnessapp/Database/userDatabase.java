@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.util.Log;
 
-@Database(entities = {userEntity.class}, version = 4, exportSchema = false)
+@Database(entities = {UserEntity.class}, version = 4, exportSchema = false)
 public abstract class userDatabase extends RoomDatabase {
     private static userDatabase sInstance;
     private static final String TAG = userDatabase.class.getSimpleName();

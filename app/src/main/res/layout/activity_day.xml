@@ -23,14 +23,14 @@
             android:drawableStart="@drawable/burn"
             android:gravity="center"
             android:textSize="28sp"
-            android:text="@string/calories_burned_0"
+            android:text="@string/calories_burned"
             android:drawableLeft="@drawable/burn" />
         <TextView
             android:id="@+id/exerciseIds"
             android:visibility="invisible"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="0"/>
+            android:text="@string/_0"/>
         <Button
             android:id="@+id/saveButton"
             android:visibility="gone"

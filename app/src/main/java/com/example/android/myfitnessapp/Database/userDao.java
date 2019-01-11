@@ -12,17 +12,17 @@ import java.util.List;
 @Dao
 public interface userDao {
     @Query("SELECT * FROM user")
-    List<userEntity> getAll();
+    List<UserEntity> getAll();
 
     @Query("SELECT * FROM user where email LIKE  :email AND password LIKE :password")
-    userEntity findByEmail(String email, String password);
+    UserEntity findByEmail(String email, String password);
 
     @Query("SELECT COUNT(*) from user")
     int countUsers();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(userEntity user);
+    void insertAll(UserEntity user);
 
     @Delete
-    void delete(userEntity user);
+    void delete(UserEntity user);
 }

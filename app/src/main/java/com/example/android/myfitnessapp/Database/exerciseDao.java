@@ -7,21 +7,19 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Dao
 public interface exerciseDao {
 
     @Query("SELECT * FROM exercise")
-    LiveData<List<exerciseEntity>> getAll();
+    LiveData<List<ExerciseEntity>> getAll();
 
     @Query("SELECT * FROM exercise where date LIKE  :date and userId= :userId")
-    LiveData<List<exerciseEntity>>  findByDate(String date,String userId);
+    LiveData<List<ExerciseEntity>>  findByDate(String date, String userId);
 
     @Query("SELECT * FROM exercise where id in (:exeList)")
-    LiveData<List<exerciseEntity>>  findByIds(List<Integer> exeList);
+    LiveData<List<ExerciseEntity>>  findByIds(List<Integer> exeList);
 
     @Query("SELECT intCalories FROM exercise where date LIKE  :date and userId= :userId")
     LiveData<List<Integer>>  GetCalories(String date, String userId);
@@ -33,8 +31,8 @@ public interface exerciseDao {
     int countExercise();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(exerciseEntity exercise);
+    void insertAll(ExerciseEntity exercise);
 
     @Delete
-    void delete(exerciseEntity exercise);
+    void delete(ExerciseEntity exercise);
 }

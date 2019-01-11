@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,15 +13,12 @@ import android.widget.TextView;
 
 import com.example.android.myfitnessapp.Adapter.exerciseAdapter;
 import com.example.android.myfitnessapp.Adapter.workoutAdapter;
+import com.example.android.myfitnessapp.Database.ExerciseEntity;
 import com.example.android.myfitnessapp.Database.MainViewModel;
-import com.example.android.myfitnessapp.Database.exerciseDatabase;
-import com.example.android.myfitnessapp.Database.exerciseEntity;
-import com.example.android.myfitnessapp.Database.userDatabase;
 import com.example.android.myfitnessapp.Database.workoutEntity;
 import com.example.android.myfitnessapp.listener.ItemClickListenerObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +46,7 @@ public class WorkoutsActivity  extends BaseActivity implements ItemClickListener
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
         mEmptyView = findViewById(R.id.emptyView);
-        setAppBarTitle(getString(R.string.my_workouts));
+        setTitle(getString(R.string.my_workouts));
         setBottomNavChecked(1);
         setUpViewModelForWorkouts(userId);
     }
@@ -111,9 +107,9 @@ public class WorkoutsActivity  extends BaseActivity implements ItemClickListener
 
         MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         try {
-            viewModel.getWorkoutExercises(list).observe(this, new Observer<List<exerciseEntity>>() {
+            viewModel.getWorkoutExercises(list).observe(this, new Observer<List<ExerciseEntity>>() {
                 @Override
-                public void onChanged(@Nullable List<exerciseEntity> exerciseEntities) {
+                public void onChanged(@Nullable List<ExerciseEntity> exerciseEntities) {
                     if (exerciseEntities.size() != 0) {
                         exeAdapter.setExerciseList(exerciseEntities);
                         mRecyclerView.setAdapter(exeAdapter);

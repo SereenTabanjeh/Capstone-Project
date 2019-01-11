@@ -14,8 +14,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.android.myfitnessapp.Database.AppExecutors;
+import com.example.android.myfitnessapp.Database.ExerciseEntity;
 import com.example.android.myfitnessapp.Database.exerciseDatabase;
-import com.example.android.myfitnessapp.Database.exerciseEntity;
 import com.example.android.myfitnessapp.Widgets.WidgetUpdateService;
 import com.example.android.myfitnessapp.util.Utilities;
 
@@ -36,7 +36,9 @@ public class NewExerciseActivity  extends BaseActivity implements View.OnClickLi
     private Date mDate;
     String userName ;
     String userId;
-    exerciseEntity exercise;
+    ExerciseEntity exercise;
+    int repsOrDuration=0;
+    int intCalories=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,9 +94,19 @@ public class NewExerciseActivity  extends BaseActivity implements View.OnClickLi
         if (!validName || !validNumber || !validCalories) return;
 
         String muscle = mMuscleSpinner.getSelectedItem().toString();
-        int repsOrDuration = Integer.parseInt(repsDuration);
-        int intCalories = Integer.parseInt(calories);
 
+        try {
+          repsOrDuration= Integer.parseInt(repsDuration);
+        } catch (NumberFormatException e) {
+            Toast.makeText(getApplicationContext(), "Invalid number reps Or Duration", Toast.LENGTH_LONG).show();
+            return;
+        }
+        try {
+            intCalories = Integer.parseInt(calories);
+        } catch (NumberFormatException e){
+            Toast.makeText(getApplicationContext(), "Invalid number of Calories", Toast.LENGTH_LONG).show();
+            return;
+        }
         boolean isReps = mReps.isChecked();
         int reps = 0;
         int minutes = 0;
@@ -102,7 +114,12 @@ public class NewExerciseActivity  extends BaseActivity implements View.OnClickLi
 
         String weight = mWeight.getText().toString().trim();
         if (!weight.equals("")) {
-            intWeight = Integer.parseInt(weight);
+            try {
+                intWeight = Integer.parseInt(weight);
+            } catch (NumberFormatException e){
+                Toast.makeText(getApplicationContext(), "Invalid number of Weight", Toast.LENGTH_LONG).show();
+                return;
+            }
         }
         if (isReps) {
             reps = repsOrDuration;
@@ -120,7 +137,7 @@ public class NewExerciseActivity  extends BaseActivity implements View.OnClickLi
         String strDate= dateFormatter.format(mDate);
 
 
-        exercise = new exerciseEntity();
+        exercise = new ExerciseEntity();
         exercise.setName(name);
         exercise.setReps(reps);
         exercise.setMinutes(minutes);
@@ -172,6 +189,7 @@ public class NewExerciseActivity  extends BaseActivity implements View.OnClickLi
         Intent intent = new Intent(NewExerciseActivity.this, DayActivity.class);
         intent.putExtra("date", mDate.getTime());
         startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         finish();
     }
 }

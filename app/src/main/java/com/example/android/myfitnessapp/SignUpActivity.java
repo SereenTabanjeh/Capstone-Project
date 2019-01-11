@@ -11,12 +11,10 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.android.myfitnessapp.Database.AppExecutors;
-import com.example.android.myfitnessapp.Database.exerciseDatabase;
+import com.example.android.myfitnessapp.Database.UserEntity;
 import com.example.android.myfitnessapp.Database.userDatabase;
-import com.example.android.myfitnessapp.Database.userEntity;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -26,8 +24,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     EditText mPassword;
     EditText mConfirmPassword;
     Button mSignUpButton;
-    userEntity user ;
-    userEntity userLoggedIn ;
+    UserEntity user ;
+    UserEntity userLoggedIn ;
     private final String TAG = "SignUpActivity";
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String IS_LOGIN = "IsLoggedIn";
@@ -45,8 +43,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         mPassword = findViewById(R.id.password);
         mConfirmPassword = findViewById(R.id.confirmPassword);
         mSignUpButton= findViewById(R.id.signUpButton);
-        user = new userEntity();
-        userLoggedIn = new userEntity();
+        user = new UserEntity();
+        userLoggedIn = new UserEntity();
         mSignUpButton.setOnClickListener(this);
 
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

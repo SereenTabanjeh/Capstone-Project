@@ -11,6 +11,7 @@
     <ImageView
         android:id="@+id/muscleImage"
         android:layout_width="100dp"
+        android:contentDescription="@string/muscleImage"
         android:layout_height="70dp"
         android:src="@drawable/ic_whole_body_workout_icon"
        />

@@ -4,7 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
-import com.example.android.myfitnessapp.Database.exerciseEntity;
+
+import com.example.android.myfitnessapp.Database.ExerciseEntity;
 import com.example.android.myfitnessapp.R;
 
 
@@ -20,7 +21,7 @@ public class listViewsService extends RemoteViewsService
 class ListViewsFactory implements RemoteViewsService.RemoteViewsFactory
 {
     private Context mContext;
-    private exerciseEntity mEcercise;
+    private ExerciseEntity mEcercise;
 
     public ListViewsFactory(Context mContext)
     {
@@ -59,7 +60,14 @@ class ListViewsFactory implements RemoteViewsService.RemoteViewsFactory
     {
         RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_layout);
 
-        views.setTextViewText(R.id.name," Last Saved Exercise :"+"\n"+"Exercise Name : "+ mEcercise.getName()+"\n" +"Calories Burned : "+ mEcercise.getIntCalories()+"\n" +"Date : "+  mEcercise.getDate()+"\n"+ "Muscle : "+ mEcercise.getMuscle()+"\n");
+        if (mEcercise.getDate() != null) {
+            views.setTextViewText(R.id.name,"Last Saved Exercise :"+"\n"+"Exercise Name : "+ mEcercise.getName()+"\n" +"Calories Burned : "+ mEcercise.getIntCalories()+"\n" +"Date : "+  mEcercise.getDate()+"\n"+ "Muscle : "+ mEcercise.getMuscle()+"\n");
+        }
+        else{
+
+            views.setTextViewText(R.id.name,mEcercise.getName());
+        }
+
 
         return views;
     }

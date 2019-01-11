@@ -18,7 +18,7 @@
         android:id="@+id/action_maps"
         android:checked="false"
         android:icon="@drawable/ic_location_on_black_24dp"
-        android:title="Maps"
+        android:title="@string/Maps"
         app:showAsAction="ifRoom" />
 
 </menu>

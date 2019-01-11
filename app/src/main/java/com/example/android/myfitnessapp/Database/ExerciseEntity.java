@@ -8,7 +8,7 @@ import android.os.Parcelable;
 
 
 @Entity(tableName = "exercise")
-public class exerciseEntity implements Parcelable {
+public class ExerciseEntity implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -37,7 +37,7 @@ public class exerciseEntity implements Parcelable {
     @ColumnInfo(name = "userId")
     private String userId;
 
-    public exerciseEntity() {
+    public ExerciseEntity() {
             this.name = name;
             this.reps = reps;
             this.minutes = minutes;
@@ -48,7 +48,7 @@ public class exerciseEntity implements Parcelable {
             this.userId = userId;
         }
 
-    public exerciseEntity(Parcel in) {
+    public ExerciseEntity(Parcel in) {
         id = in.readInt();
         name = in.readString();
         reps = in.readInt();
@@ -60,15 +60,15 @@ public class exerciseEntity implements Parcelable {
         userId = in.readString();
     }
 
-    public static final Creator<exerciseEntity> CREATOR = new Creator<exerciseEntity>() {
+    public static final Creator<ExerciseEntity> CREATOR = new Creator<ExerciseEntity>() {
         @Override
-        public exerciseEntity createFromParcel(Parcel in) {
-            return new exerciseEntity(in);
+        public ExerciseEntity createFromParcel(Parcel in) {
+            return new ExerciseEntity(in);
         }
 
         @Override
-        public exerciseEntity[] newArray(int size) {
-            return new exerciseEntity[size];
+        public ExerciseEntity[] newArray(int size) {
+            return new ExerciseEntity[size];
         }
     };
 

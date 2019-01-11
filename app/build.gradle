@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        signingConfigs {
+            keyAlias 'MyKey'
+            keyPassword 'nanodegree'
+            storeFile file('C:/Users/sereen.tabanjeh/Downloads/Fitness/MyFitnessApp/keystores/MyAppKey.jks')
+            storePassword 'nanodegree'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.android.myfitnessapp"
@@ -15,8 +23,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
 
+        debug {
+            signingConfig signingConfigs.signingConfigs
+        }
+    }
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
         exclude 'META-INF/DEPENDENCIES.txt'
@@ -40,7 +51,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:support-v4:27.1.1'
@@ -48,6 +59,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:design:27.1.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'android.arch.persistence.room:runtime:1.0.0'
@@ -59,5 +71,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation 'com.google.android.gms:play-services-places:16.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
-
+    implementation "com.andkulikov:transitionseverywhere:1.8.1"
 }

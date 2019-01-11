@@ -1,16 +1,12 @@
 package com.example.android.myfitnessapp.Database;
 
-import android.arch.persistence.db.SupportSQLiteOpenHelper;
 import android.arch.persistence.room.Database;
-import android.arch.persistence.room.DatabaseConfiguration;
-import android.arch.persistence.room.InvalidationTracker;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
 import android.util.Log;
 
-@Database(entities = {exerciseEntity.class}, version = 5, exportSchema = false)
+@Database(entities = {ExerciseEntity.class}, version = 5, exportSchema = false)
 public abstract class exerciseDatabase extends RoomDatabase {
     private static exerciseDatabase sInstance;
     private static final String TAG = exerciseDatabase.class.getSimpleName();

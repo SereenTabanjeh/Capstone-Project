@@ -7,7 +7,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Entity(tableName = "user")
-public class userEntity implements Parcelable {
+public class UserEntity implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private int uid;
@@ -24,7 +24,7 @@ public class userEntity implements Parcelable {
     @ColumnInfo(name = "password")
     private String password;
 
-    public userEntity() {
+    public UserEntity() {
         //this.uid = uid;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,7 +34,7 @@ public class userEntity implements Parcelable {
 
 
 
-    public userEntity(Parcel in) {
+    public UserEntity(Parcel in) {
         uid = in.readInt();
         firstName = in.readString();
         lastName = in.readString();
@@ -42,15 +42,15 @@ public class userEntity implements Parcelable {
         password = in.readString();
     }
 
-    public static final Creator<userEntity> CREATOR = new Creator<userEntity>() {
+    public static final Creator<UserEntity> CREATOR = new Creator<UserEntity>() {
         @Override
-        public userEntity createFromParcel(Parcel in) {
-            return new userEntity(in);
+        public UserEntity createFromParcel(Parcel in) {
+            return new UserEntity(in);
         }
 
         @Override
-        public userEntity[] newArray(int size) {
-            return new userEntity[size];
+        public UserEntity[] newArray(int size) {
+            return new UserEntity[size];
         }
     };
 

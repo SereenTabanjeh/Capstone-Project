@@ -6,15 +6,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
+import android.support.v7.widget.Toolbar;
+
 
 import static com.example.android.myfitnessapp.LogInActivity.IS_LOGIN;
 
@@ -22,6 +22,7 @@ import static com.example.android.myfitnessapp.LogInActivity.IS_LOGIN;
 public class BaseActivity extends AppCompatActivity  {
     private ProgressDialog mProgressDialog;
     public BottomNavigationView mBottomNavigationView;
+    private Toolbar mTopToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,25 +31,22 @@ public class BaseActivity extends AppCompatActivity  {
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Loading...");
         mProgressDialog.setCancelable(false);
+
     }
 
     @Override
     public void setContentView(int layoutResID) {
-        RelativeLayout fullView = (RelativeLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
+        ConstraintLayout fullView = (ConstraintLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
         FrameLayout activityContainer =  fullView.findViewById(R.id.activity_content);
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullView);
         mBottomNavigationView =  findViewById(R.id.bottom_navigation);
+        mTopToolbar= findViewById(R.id.app_bar);
         initBottomNav();
+        setSupportActionBar(mTopToolbar);
+
     }
 
-
-    public void setAppBarTitle(String title) {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(title);
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,6 +100,7 @@ public class BaseActivity extends AppCompatActivity  {
         Intent intent = new Intent(BaseActivity.this, MapsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         finish();
     }
 
@@ -109,11 +108,13 @@ public class BaseActivity extends AppCompatActivity  {
         Intent intent = new Intent(BaseActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         finish();
     }
 
     private void navigateToWorkouts() {
         Intent workoutIntent = new Intent(BaseActivity.this, WorkoutsActivity.class);
+        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
         startActivity(workoutIntent);
     }
 

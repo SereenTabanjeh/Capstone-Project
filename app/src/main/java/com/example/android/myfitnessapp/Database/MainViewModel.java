@@ -12,8 +12,8 @@ import java.util.List;
 public class MainViewModel extends AndroidViewModel {
 
     public static final String TAG = MainViewModel.class.getSimpleName();
-    public  LiveData<List<exerciseEntity>> exerciseList;
-    private List<exerciseEntity> exercise;
+    public  LiveData<List<ExerciseEntity>> exerciseList;
+    private List<ExerciseEntity> exercise;
     public LiveData<List<Integer>> Calories;
     public LiveData<List<Integer>> exerciseIds;
     public  LiveData<List<workoutEntity>> workoutList;
@@ -23,7 +23,7 @@ public class MainViewModel extends AndroidViewModel {
 
         exerciseDatabase exerciseDB = exerciseDatabase.getAppDatabase(this.getApplication());
         Log.e(TAG, "Actively retrieving the Exercises from the database");
-      //  exerciseList =  exerciseDB.exerciseDao().getAll();
+
     }
 
 
@@ -34,7 +34,7 @@ public class MainViewModel extends AndroidViewModel {
         return Calories;
     }
 
-    public LiveData<List<exerciseEntity>> getExerciseList(String date, String userId) {
+    public LiveData<List<ExerciseEntity>> getExerciseList(String date, String userId) {
         exerciseDatabase exerciseDB = exerciseDatabase.getAppDatabase(this.getApplication());
         exerciseList =  exerciseDB.exerciseDao().findByDate(date,userId);
         return exerciseList;
@@ -46,7 +46,7 @@ public class MainViewModel extends AndroidViewModel {
         return exerciseIds;
     }
 
-    public LiveData<List<exerciseEntity>> getExerciseList() {
+    public LiveData<List<ExerciseEntity>> getExerciseList() {
         exerciseDatabase exerciseDB = exerciseDatabase.getAppDatabase(this.getApplication());
         exerciseList =  exerciseDB.exerciseDao().getAll();
         return exerciseList;
@@ -58,17 +58,17 @@ public class MainViewModel extends AndroidViewModel {
         return workoutList;
     }
 
-    public LiveData<List<exerciseEntity>> getWorkoutExercises(List<Integer> ids) {
+    public LiveData<List<ExerciseEntity>> getWorkoutExercises(List<Integer> ids) {
         exerciseDatabase exeDB = exerciseDatabase.getAppDatabase(this.getApplication());
         exerciseList =  exeDB.exerciseDao().findByIds(ids);
         return exerciseList;
     }
 
-    public List<exerciseEntity> getExercise() {
+    public List<ExerciseEntity> getExercise() {
         return exercise;
     }
 
-    public void setExercise(List<exerciseEntity> exercise) {
+    public void setExercise(List<ExerciseEntity> exercise) {
         this.exercise = exercise;
     }
 }

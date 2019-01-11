@@ -45,7 +45,7 @@
     <string name="date">Date:</string>
     <string name="calories_burned_icon">calories burned icon</string>
     <string name="calories_burned_0">Calories Burned: 0</string>
-    <string name="API_KEY">"Please Enter your API Key"</string>
+    <string name="API_KEY">Your API Key</string>
     <string name="save_this_workout">Save This Workout</string>
     <string name="add_an_exercise">Add An Exercise</string>
     <string name="image_of_feet_of_person_walking_up_stairs">image of feet of person walking up stairs</string>
@@ -65,4 +65,12 @@
     <string name="title_activity_maps">Map</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="calories_burned">Calories Burned:  </string>
+    <string name="welcome_imageView">Welcome Image in First Page</string>
+    <string name="Burn_Image">Burn small Image used for calories icon</string>
+    <string name="muscleImage">Muscle Image</string>
+    <string name="retry">Retry</string>
+    <string name="nearby">Get Nearby GYMs</string>
+    <string name="Maps">Maps</string>
+    <string name="no_new_exercise">You don\'t have any new exercise, go and log new exercise !</string>
 </resources>
