@@ -61,7 +61,7 @@ class ListViewsFactory implements RemoteViewsService.RemoteViewsFactory
         RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_layout);
 
         if (mEcercise.getDate() != null) {
-            views.setTextViewText(R.id.name,"Last Saved Exercise :"+"\n"+"Exercise Name : "+ mEcercise.getName()+"\n" +"Calories Burned : "+ mEcercise.getIntCalories()+"\n" +"Date : "+  mEcercise.getDate()+"\n"+ "Muscle : "+ mEcercise.getMuscle()+"\n");
+            views.setTextViewText(R.id.name,mContext.getString(R.string.LastSaved)+mContext.getString(R.string.ExeName)+ mEcercise.getName()+mContext.getString(R.string.CalBurned)+ mEcercise.getIntCalories()+mContext.getString(R.string.Date)+  mEcercise.getDate()+mContext.getString(R.string.Muscle)+ mEcercise.getMuscle());
         }
         else{
 

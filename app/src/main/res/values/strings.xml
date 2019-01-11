@@ -73,4 +73,10 @@
     <string name="nearby">Get Nearby GYMs</string>
     <string name="Maps">Maps</string>
     <string name="no_new_exercise">You don\'t have any new exercise, go and log new exercise !</string>
+    <string name="LastSaved">Last Saved Exercise : \n</string>
+    <string name="ExeName">Exercise Name :</string>
+    <string name="CalBurned">\n Calories Burned : </string>
+    <string name="Date">\n Date : </string>
+    <string name="Muscle">\n Muscle : </string>
+
 </resources>
